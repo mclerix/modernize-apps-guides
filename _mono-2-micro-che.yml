@@ -2,7 +2,7 @@ id: "monomicro"
 name: "OpenShift Application Modernization Workshop"
 
 content:
-  url: https://raw.githubusercontent.com/clerixmaxime/modernize-apps-guides/master
+  url: https://raw.githubusercontent.com/gestrem/modernize-apps-guides/master
 
 vars:
   OPENSHIFT_DOCS_BASE: "https://docs.openshift.com/container-platform/3.11"
@@ -16,16 +16,18 @@ vars:
   REMOTE_DEBUGGER_JBDS: true
   REMOTE_DEBUGGER_IDEA: true
   MINISHIFT: false             # if labs are intended to run on minishift or CDK
-  OPENSHIFT_CONSOLE_URL: OPENSHIFT-CONSOLE-URL
+  OPENSHIFT_CONSOLE_URL: toto.fr
   INVENTORY_ROUTE_HOST: INVENTORY-ROUTE-HOST
   CATALOG_ROUTE_HOST: CATALOG-ROUTE-HOST
   API_GATEWAY_ROUTE_HOST: API-GATEWAY-ROUTE-HOST
   ECLIPSE_CHE_URL: "http://che-lab-infra.192.168.99.100.nip.io"
   GIT_URL: "http://gogs-lab-infra.192.168.99.100.nip.io"
   NEXUS_URL: "http://nexus.lab-infra.svc:8081/repository/maven-all-public"
-  OPENSHIFT_USER: userX
+  OPENSHIFT_USER: toto
   OPENSHIFT_PASWORD: PASSWORD
   ROUTE_SUFFIX: ROUTE_SUFFIX
+
+  
   
 modules:
   activate:

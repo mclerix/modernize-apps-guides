@@ -280,7 +280,7 @@ Navigate to the Web Console to see your new app and the components using this li
 
 * Coolstore Prod Project Overview at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod/overview`
+`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod/overview`
 
 ![Prod]({% image_path developer-intro/coolstore-prod-overview.png %}){:width="80%"}
 
@@ -350,7 +350,7 @@ You can use the _oc_ command line to invoke the build pipeline, or the Web Conso
 
 * Web Console - Coolstore Monolith Prod at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod`
+`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod`
 
 Next, navigate to _Builds -> Pipelines_ and click __Start Pipeline__ next to the `coolstore-monolith` pipeline:
 
@@ -398,7 +398,7 @@ Open the `monolith-pipeline` configuration page in the Web Console (you can navi
 
 * Pipeline Config page at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod/browse/pipelines/monolith-pipeline?tab=configuration`
+`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod/browse/pipelines/monolith-pipeline?tab=configuration`
 
 On this page you can see the pipeline definition. Click _Actions -> Edit_ to edit the pipeline:
 

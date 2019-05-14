@@ -979,7 +979,7 @@ Flow the steps below to create a path based route.
 
 **1. Obtain hostname of monolith UI from our Dev environment**
 
-`oc get route/www -n $OCP_USERcoolstore-dev`
+`oc get route/www -n $OCP_USER-coolstore-dev`
 
 > /!\ Change the project name according to your user number
 

@@ -700,7 +700,7 @@ We'll use the CLI to deploy the components for our monolith. To deploy the monol
 
 Switch to the dev project you created earlier:
 
-`oc project userXX-coolstore-dev`
+`oc project {{OPENSHIFT_USER}}-coolstore-dev`
 
 And finally deploy template:
 

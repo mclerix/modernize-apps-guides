@@ -700,17 +700,17 @@ We'll use the CLI to deploy the components for our monolith. To deploy the monol
 
 Switch to the dev project you created earlier:
 
-`oc project {{OPENSHIFT_USER}}-coolstore-dev`
+`oc project $OCP_USER-coolstore-dev`
 
 And finally deploy template:
 
-`oc new-app coolstore-monolith-binary-build`
+`oc new-app coolstore-monolith-binary-build -n $OCP_USER-coolstore-dev`
 
 This will deploy both a PostgreSQL database and JBoss EAP, but it will not start a build for our application.
 
 Then open up the Monolith Overview page at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-dev/`
+`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-dev/`
 and verify the monolith template items are created:
 
 ![OpenShift Console]({% image_path moving-existing-apps/no-deployments.png %}){:width="60%"}

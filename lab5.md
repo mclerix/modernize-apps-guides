@@ -884,7 +884,7 @@ We have already deployed our coolstore monolith and inventory to OpenShift. In t
 Make sure that you are on the right project
 
 ~~~sh
-oc project userXX-modern-coolstore
+oc project $OCP_USER-modern-coolstore
 ~~~
 
 Next, we'll deploy your new microservice to OpenShift.
@@ -979,7 +979,7 @@ Flow the steps below to create a path based route.
 
 **1. Obtain hostname of monolith UI from our Dev environment**
 
-`oc get route/www -n userXX-coolstore-dev`
+`oc get route/www -n $OCP_USERcoolstore-dev`
 
 > /!\ Change the project name according to your user number
 

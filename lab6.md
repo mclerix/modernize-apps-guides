@@ -1111,7 +1111,7 @@ We have already deployed our coolstore monolith, inventory and catalog to OpenSh
 
 Make sure you are on the right OpenShift project :
 
-`oc project userXX-modern-coolstore`
+`oc project $OCP_USER-modern-coolstore`
 
 **3. Open the OpenShift Web Console**
 
@@ -1216,7 +1216,7 @@ Flow the steps below to create a path based route.
 
 **1. Obtain hostname of monolith UI from our Dev environment**
 
-`oc get route/www -n userXX-coolstore-dev`
+`oc get route/www -n $OCP_USER-coolstore-dev`
 > Make sure to replace the name of the project with your user number.
 
 The output of this command shows us the hostname:

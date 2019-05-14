@@ -219,7 +219,7 @@ This will update the ROOT.war file again and cause the application to change.
 
 Re-visit the app by reloading the Coolstore webpage (or clicking again on the Coolstore application link at 
 
-`http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}})`.
+`http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}}`.
 
 ![Blue]({% image_path developer-intro/nav-blue.png %}){:width="80%"}
 
@@ -250,7 +250,7 @@ In this step we are now going to setup a separate production environment and exp
 
 ## Prod vs. Dev
 
-The existing `userXX-coolstore-dev` project is used as a developer environment for building new versions of the app after code changes and deploying them to the development environment.
+The existing `$OCP_USER-coolstore-dev` project is used as a developer environment for building new versions of the app after code changes and deploying them to the development environment.
 
 In a real project on OpenShift, _dev_, _test_ and _production_ environments would typically use different OpenShift projects and perhaps even different OpenShift clusters.
 
@@ -264,9 +264,9 @@ We will create and initialize the new production environment using another templ
 
 Execute the following `oc` command to create a new project:
 
-`oc new-project userXX-coolstore-prod --display-name='Coolstore Monolith - Production'`
+`oc new-project $OCP_USER-coolstore-prod --display-name='Coolstore Monolith - Production'`
 
-This will create a new OpenShift project called `userXX-coolstore-prod` from which our production application will run.
+This will create a new OpenShift project called `$OCP_USER-coolstore-prod` from which our production application will run.
 
 **2. Add the production elements**
 
@@ -280,7 +280,7 @@ Navigate to the Web Console to see your new app and the components using this li
 
 * Coolstore Prod Project Overview at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod/overview`
+`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod/overview`
 
 ![Prod]({% image_path developer-intro/coolstore-prod-overview.png %}){:width="80%"}
 
@@ -341,7 +341,7 @@ To simplify the pipeline in this workshop, we simulate the build and tests and s
 Jenkins should have the authorization to tag the image available in the DEV environment. Enter the following command:
 
 ~~~sh
-oc policy add-role-to-user edit system:serviceaccount:userXX-coolstore-prod:jenkins -n userXX-coolstore-dev
+oc policy add-role-to-user edit system:serviceaccount:$OCP_USER-coolstore-prod:jenkins -n $OCP_USER-coolstore-dev
 ~~~
 
 **2. Promote the dev image to production using the pipeline**
@@ -350,7 +350,7 @@ You can use the _oc_ command line to invoke the build pipeline, or the Web Conso
 
 * Web Console - Coolstore Monolith Prod at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod`
+`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod`
 
 Next, navigate to _Builds -> Pipelines_ and click __Start Pipeline__ next to the `coolstore-monolith` pipeline:
 
@@ -363,14 +363,14 @@ take as much time as the Jenkins infrastructure will already be warmed up). You 
 
 Once the pipeline completes, return to the Prod Project Overview at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod`
+`https://{{OPENSHIFT_MASTER}}/console/project/$USER_OCP-coolstore-prod`
 and notice that the application is now deployed and running!
 
 ![Prod]({% image_path developer-intro/pipe-done.png %}){:width="80%"}
 
 View the production app **with the blue header from before** is running by clicking: CoolStore Production App at 
 
-`http://www-userXX-coolstore-prod.{{ROUTE_SUFFIX}}` (it may take
+`http://www-$USER_OCP-coolstore-prod.{{ROUTE_SUFFIX}}` (it may take
 a few moments for the container to deploy fully.)
 
 ## Congratulations!
@@ -398,7 +398,7 @@ Open the `monolith-pipeline` configuration page in the Web Console (you can navi
 
 * Pipeline Config page at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod/browse/pipelines/monolith-pipeline?tab=configuration`
+`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-prod/browse/pipelines/monolith-pipeline?tab=configuration`
 
 On this page you can see the pipeline definition. Click _Actions -> Edit_ to edit the pipeline:
 
@@ -494,7 +494,7 @@ Once you click **Proceed**, you will see the log file from Jenkins showing the f
 
 Wait for the production deployment to complete:
 
-`oc rollout -n userXX-coolstore-prod status dc/coolstore-prod`
+`oc rollout -n $OCP_USER-coolstore-prod status dc/coolstore-prod`
 
 Once it completes, verify that the production application has the new change (original black header):
 

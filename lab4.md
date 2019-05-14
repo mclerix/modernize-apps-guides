@@ -385,7 +385,7 @@ In this step we will deploy our new Inventory microservice for our CoolStore app
 Create a new project for the modernized services:
 
 ~~~sh
-oc new-project userXX-modern-coolstore --display-name="CoolStore Microservice Application"
+oc new-project $OCP_USER-modern-coolstore --display-name="CoolStore Microservice Application"
 ~~~
 
 **3. Open the OpenShift Web Console**

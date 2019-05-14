@@ -89,8 +89,11 @@ Let's add your username as an environment variable for the next lab. This will h
 `echo "export OCP_USER=\"userXX\"" >> ~/.bash_profile; source ~/.bash_profile`
 
 Enter the following command to ensure OCP_USER is properly set :
+
 `gestrem-mac:guide-mono2micro gestrem$ echo $OCP_USER`
+
 You should expect :
+
 `yourusername`
 
 Issue the following command in Codeready Workspaces terminal and replace `{{OPENSHIFT_CONSOLE_URL}}` 

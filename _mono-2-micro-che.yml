@@ -16,14 +16,14 @@ vars:
   REMOTE_DEBUGGER_JBDS: true
   REMOTE_DEBUGGER_IDEA: true
   MINISHIFT: false             # if labs are intended to run on minishift or CDK
-  OPENSHIFT_CONSOLE_URL: toto.fr
+  OPENSHIFT_CONSOLE_URL: OPENSHIFT-CONSOLE-URL
   INVENTORY_ROUTE_HOST: INVENTORY-ROUTE-HOST
   CATALOG_ROUTE_HOST: CATALOG-ROUTE-HOST
   API_GATEWAY_ROUTE_HOST: API-GATEWAY-ROUTE-HOST
   ECLIPSE_CHE_URL: "http://che-lab-infra.192.168.99.100.nip.io"
   GIT_URL: "http://gogs-lab-infra.192.168.99.100.nip.io"
   NEXUS_URL: "http://nexus.lab-infra.svc:8081/repository/maven-all-public"
-  OPENSHIFT_USER: toto
+  OPENSHIFT_USER: userX
   OPENSHIFT_PASWORD: PASSWORD
   ROUTE_SUFFIX: ROUTE_SUFFIX
 

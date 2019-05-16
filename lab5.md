@@ -491,9 +491,7 @@ The Spring MVC Framework default uses Jackson to serialize or map Java objects t
 
 Now you can run the `CatalogEndpointTest` and verify that it works.
 
-~~~sh
-mvn verify -Dtest=CatalogEndpointTest
-~~~ 
+`mvn verify -Dtest=CatalogEndpointTest` 
 
 or use ``test-spring-boot`` command in the command palette.
 
@@ -501,9 +499,8 @@ Since we now have endpoints that returns the catalog we can also start the servi
 
 Start the application by running the following command:
 
-~~~sh
-mvn spring-boot:run
-~~~~
+
+`mvn spring-boot:run`
 
 or use ``run-spring-boot`` command in the command palette.
 
@@ -688,9 +685,7 @@ productList.parallelStream()
 
 We are now ready to test the service
 
-~~~sh
-mvn verify
-~~~ 
+`mvn verify` 
 
 or use ``test-spring-boot`` command in the command palette.
 

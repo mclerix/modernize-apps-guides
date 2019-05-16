@@ -50,9 +50,7 @@ Eclipse Vert.x is event-driven and non-blocking, which means that applications i
 
 Run the following commands to set up your environment for this scenario and start in the right directory:
 
-~~~sh
-cd /projects/modernize-apps/cart
-~~~
+`cd /projects/modernize-apps/cart`
 
 ## Examine the sample project
 
@@ -240,9 +238,8 @@ public class CartServiceVerticle extends AbstractVerticle {
 
 Currently our verticle doesn't really do anything except logging some info. Let's try it out. Execute:
 
-~~~sh
-mvn compile vertx:run
-~~~ 
+`mvn compile vertx:run`
+ 
 
 or use ``build-vertx`` command in the command palette.
 
@@ -283,9 +280,8 @@ vertx.createHttpServer().requestHandler(router::accept).listen(serverPort);
 
 Now let's restart the application. Execute:
 
-~~~sh
-mvn compile vertx:run
-~~~~
+`mvn compile vertx:run`
+
 
 or use ``run-vertx`` command in the command palette.
 
@@ -321,17 +317,14 @@ It's actually not necessary to set the status, since it will default to HTTP OK 
 
 Restart the application by running the following in the terminal or in clicking the execute button.
 
-~~~sh
-mvn compile vertx:run
-~~~~
+`mvn compile vertx:run`
 
 or use ``run-vertx`` command in the command palette.
 
 After Vert.x is start execute a curl command in another terminal so like this. 
 
-~~~sh
-curl -X GET http://localhost:10080/hello; echo
-~~~
+
+`curl -X GET http://localhost:10080/hello; echo`
 
 The response body should be a JSON string `{"message":"Hello"}`.
 
@@ -480,9 +473,8 @@ Then Change the `<vertx.verticle>com.redhat.coolstore.CartServiceVerticle</vertx
 
 Restart the application by running the following in the terminal or in clicking the execute button.
 
-~~~sh
-mvn compile vertx:run
-~~~~
+`mvn compile vertx:run`
+
 
 or use ``run-vertx`` command in the command palette.
 
@@ -582,9 +574,8 @@ router.get("/services/carts").handler(rc -> {
 
 Restart the application by running the following in the terminal or in clicking the execute button.
 
-~~~sh
-mvn compile vertx:run
-~~~~
+
+`mvn compile vertx:run`
 
 or use ``run-vertx`` command in the command palette.
 
@@ -619,9 +610,7 @@ This should print the body of the response  that looks somewhat like this. Note 
 
 Also test getting a single cart curl like this:
 
-~~~sh
-curl -X GET http://localhost:8082/services/cart/99999; echo
-~~~
+`curl -X GET http://localhost:8082/services/cart/99999; echo`
 
 Click on the **preview URL** which will open another tab or window of your browser pointing to port 8082 on your client. 
 
@@ -757,31 +746,30 @@ Phew! That wasn't easy... However, in real life thing are never as easy as they 
 
 Let's first test to update the quantity for a product that is already in the shopping cart. Start the cart service:
 
-~~~sh
-mvn compile vertx:run
-~~~~
+`mvn compile vertx:run`
 
 or use ``run-vertx`` command in the command palette.
 
 Then execute this to test retrieving a specific cart and the quantity of item `329299` in the cart:
 
-~~~sh
-curl -s http://localhost:8082/services/cart/99999 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+`curl -s http://localhost:8082/services/cart/99999 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
+
 
 This will return the quantity like below, but the actual number may be different.
 
-`"quantity" : 3`
-
+~~~json
+"quantity" : 3`
+~~~
 Now let's call our addToCart method.
 
-~~~sh
-curl -s -X POST http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+`curl -s -X POST http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
+
 
 This should now return a shopping cart where one more instance of the product is added, because of our grep commands you would see something like this:
 
-`"quantity" : 4`
+~~~json
+"quantity" : 4
+~~~~
 
 Now let's try adding a new product.
 
@@ -791,15 +779,13 @@ The CartService depends on the CatalogService and just like in the Spring Boot e
 
 First lets check if the catalog service is still running locally.
 
-~~~sh
-curl -v http://localhost:8081/services/products 2>&1 | grep "HTTP/1.1 200"
-~~~
+`curl -v http://localhost:8081/services/products 2>&1 | grep "HTTP/1.1 200"`
+
 
 If that prints `< HTTP/1.1 200` then our service is responding correctly otherwise we need to start the Catalog application in a separate terminal like this:
 
-~~~sh
-cd ~/projects/catalog; mvn clean spring-boot:run -DskipTests
-~~~~
+`cd ~/projects/catalog; mvn clean spring-boot:run -DskipTests`
+
 
 or use `run-spring-boot` command in the command palette.
 
@@ -809,9 +795,8 @@ Wait for it to complete. You should see `Started RestApplication in xxxxx second
 
 To test to add a product we are going to use a new shopping cart id. Execute:
 
-~~~sh
-curl -s -X POST http://localhost:8082/services/cart/88888/329299/1 ; echo
-~~~
+`curl -s -X POST http://localhost:8082/services/cart/88888/329299/1 ; echo`
+
 
 This should print the follow:
 
@@ -879,26 +864,27 @@ Start the cart service ``mvn compile vertx:run`` or use ``run-vertx`` command in
 
 The run this to get the quantity of item `329299` in the cart:
 
-~~~sh
-curl -s http://localhost:8082/services/cart/99999 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+
+`curl -s http://localhost:8082/services/cart/99999 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
+
 
 This will return the quantity like below, but the actual number may be different.
 
-`"quantity" : 4`
+~~~json
+"quantity" : 4
+~~~
 
 Now let's call our removeShoppingCartItem method.
 
-~~~sh
-curl -s -X DELETE http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+`curl -s -X DELETE http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
+
 
 If this results in an empty cart (quantity =0 ) this command will not return any output.
 
 If you have more than one items remaining in the cart, this will return a shopping cart where one more instance of the product is removed, because of our grep commands you would see something like this.
-
-`"quantity" : 3`
-
+~~~json
+"quantity" : 3
+~~~
 ## Congratulations
 
 Wow! You have now successfully created a Reactive microservices that are calling another REST service asynchronously. 
@@ -1087,19 +1073,18 @@ Firstly, build and start the cart service
 
 Now issue a curl command to add a product that exists
 
-~~~sh
-curl -s -X POST http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+`curl -s -X POST http://localhost:8082/services/cart/99999/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
+
 
 Let's also make sure that it works with a totally new shopping cart, which would test the second part of our changes:
 
-~~~sh
-curl -s -X POST http://localhost:8082/services/cart/88888/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity
-~~~
+`curl -s -X POST http://localhost:8082/services/cart/88888/329299/1 | grep -A7  "\"itemId\" : \"329299\"" | grep quantity`
 
 This should now return a new shopping cart where one only instance of the product is added, because of our grep commands you would see something like this:
 
-`"quantity" : 1`
+~~~json
+"quantity" : 1
+~~~
 
 > /!\ The CartService depends on the CatalogService and just like in the Spring Boot example we could have created mocks for calling the Catalog Service, however since our example is already complex, we will simply test it with the CatalogService running. 
 

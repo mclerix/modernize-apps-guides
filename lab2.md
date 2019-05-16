@@ -725,9 +725,8 @@ First, build the project once more using the `openshift` Maven profile, which wi
 
 Build the project:
 
-~~~shell
-mvn clean package -Popenshift
-~~~
+
+`mvn clean package -Popenshift`
 
 or use the command called `build-eap-openshift` in the command palette
 
@@ -735,9 +734,9 @@ Wait for the build to finish and the `BUILD SUCCESS` message!
 
 And finally, start the build process that will take the `.war` file and combine it with JBoss EAP and produce a Linux container image which will be automatically deployed into the project, thanks to the *DeploymentConfig* object created from the template:
 
-~~~shell
-oc start-build coolstore --from-file=deployments/ROOT.war
-~~~
+
+`oc start-build coolstore --from-file=deployments/ROOT.war`
+
 
 or use the command called `deploy-eap-openshift` in the command palette
 

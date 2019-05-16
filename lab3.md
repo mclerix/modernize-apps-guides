@@ -59,17 +59,16 @@ You can review the above resources in the OpenShift Web Console or using the `oc
 
 Run these commands to inspect the elements:
 
-~~~sh
-oc get bc coolstore
+`oc get bc coolstore`
 
-oc get is coolstore
+`oc get is coolstore`
 
-oc get dc coolstore
+`oc get dc coolstore`
 
-oc get svc coolstore
+`oc get svc coolstore`
 
-oc describe route www
-~~~
+`oc describe route www`
+
 
 Verify that you can access the monolith by clicking on the exposed OpenShift route at  `http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}}` to open up the sample application in a separate browser tab.
 
@@ -209,9 +208,9 @@ background: blue
 
 Again, re-build the app:
 
-~~~sh
-mvn package -Popenshift
-~~~
+
+`mvn package -Popenshift`
+
 
 or use the command `build-eap-openshift` in the command palette.
 
@@ -433,17 +432,16 @@ With the approval step in place, let's simulate a new change from a developer wh
 
 Next, re-build the app once more:
 
-~~~sh
-mvn clean package -Popenshift
-~~~~
+
+`mvn clean package -Popenshift`
+
 
 or use the command `build-eap-openshift` in the command palette.
 
 And re-deploy it to the dev environment using a binary build just as we did before:
 
-~~~sh
-oc start-build -n coolstore-dev coolstore --from-file=deployments/ROOT.war
-~~~~
+`oc start-build -n coolstore-dev coolstore --from-file=deployments/ROOT.war`
+
 
 or use the command `deploy-eap-openshift` in the command palette.
 

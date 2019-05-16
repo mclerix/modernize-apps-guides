@@ -53,10 +53,9 @@ the [RHAMT documentation](https://access.redhat.com/documentation/en/red-hat-app
 
 Run the following commands to set up your environment for this scenario and start in the right directory:
 
-~~~shell
-export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')
-cd /projects/modernize-apps/monolith
-~~~
+
+`export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));') \
+cd /projects/modernize-apps/monolith`
 
 ## Analyzing a Java EE app using Red Hat Application Migration Toolkit
 
@@ -123,16 +122,14 @@ When you later deploy the application, it will look like:
 The RHAMT CLI has a number of options to control how it runs. Click on the below command
 to execute the RHAMT CLI and analyze the existing project:
 
-~~~shell
-/rhamt/bin/rhamt-cli \
+`/rhamt/bin/rhamt-cli \
   --sourceMode \
   --input /projects/modernize-apps/monolith \
   --output /projects/rhamt-reports/monolith \
   --overwrite \
   --source weblogic \
   --target eap:7 \
-  --packages com.redhat weblogic
-~~~
+  --packages com.redhat weblogic`
 
 > Note the use of the ``--source`` and ``--target`` options. This allows you to target specific migration paths supported by RHMAT. Other
 migration paths include **IBM® WebSphere® Application Server** and **JBoss EAP** 5/6/7.
@@ -250,10 +247,8 @@ public class StartupListener {
 
 Build and package the app using Maven to make sure the changed code still compiles:
 
-~~~shell
-cd /projects/modernize-apps/monolith
-mvn clean package
-~~~
+`cd /projects/modernize-apps/monolith ; mvn clean package`
+
 
 or use the command palette to build your apps
 
@@ -491,8 +486,7 @@ In this step we will re-run the RHAMT report to verify our migration was success
 
 Click on the below command to clean the old build artifacts and re-execute the RHAMT CLI and analyze the new project:
 
-~~~shell
-mvn clean && \
+`mvn clean && \
 /rhamt/bin/rhamt-cli \
   --sourceMode \
   --input /projects/modernize-apps/monolith \
@@ -501,7 +495,7 @@ mvn clean && \
   --source weblogic \
   --target eap:7 \
   --packages com.redhat weblogic
-~~~
+`
 
 **Wait for it to complete before continuing!**. You should see `Report created: /projects/rhamt-reports/monolith/index.html`.
 
@@ -592,10 +586,9 @@ We are now ready to build and test the project
 
 Our application is at this stage pretty standards based, but it needs two things. One is the need to add the JMS Topic since our application depends on it. 
 
-~~~shell
-cd /projects/modernize-apps/monolith
+`cd /projects/modernize-apps/monolith \
 mvn wildfly:start wildfly:add-resource wildfly:shutdown
-~~~
+`
 
 or use the command palette `<shift>+F10` and then select `add-jms-resource`
 
@@ -607,9 +600,7 @@ Wait for a `BUILD SUCCESS` message. If it fails, check that you made all the cor
 
 We are now ready to deploy the application
 
-~~~shell
-mvn wildfly:run
-~~~
+`mvn wildfly:run`
 
 or use the command palette `<shift>+F10` and then select `run-eap`
 

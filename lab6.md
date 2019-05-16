@@ -758,7 +758,7 @@ Then execute this to test retrieving a specific cart and the quantity of item `3
 This will return the quantity like below, but the actual number may be different.
 
 ~~~json
-"quantity" : 3`
+"quantity" : 3
 ~~~
 Now let's call our addToCart method.
 
@@ -882,9 +882,11 @@ Now let's call our removeShoppingCartItem method.
 If this results in an empty cart (quantity =0 ) this command will not return any output.
 
 If you have more than one items remaining in the cart, this will return a shopping cart where one more instance of the product is removed, because of our grep commands you would see something like this.
+
 ~~~json
 "quantity" : 3
 ~~~
+
 ## Congratulations
 
 Wow! You have now successfully created a Reactive microservices that are calling another REST service asynchronously. 

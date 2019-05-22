@@ -122,13 +122,13 @@ When you later deploy the application, it will look like:
 The RHAMT CLI has a number of options to control how it runs. Click on the below command
 to execute the RHAMT CLI and analyze the existing project:
 
-`/rhamt/bin/rhamt-cli \
-  --sourceMode \
-  --input /projects/modernize-apps/monolith \
-  --output /projects/rhamt-reports/monolith \
-  --overwrite \
-  --source weblogic \
-  --target eap:7 \
+`/rhamt/bin/rhamt-cli 
+  --sourceMode 
+  --input /projects/modernize-apps/monolith 
+  --output /projects/rhamt-reports/monolith 
+  --overwrite 
+  --source weblogic 
+  --target eap:7 
   --packages com.redhat weblogic`
 
 > Note the use of the ``--source`` and ``--target`` options. This allows you to target specific migration paths supported by RHMAT. Other
@@ -486,14 +486,14 @@ In this step we will re-run the RHAMT report to verify our migration was success
 
 Click on the below command to clean the old build artifacts and re-execute the RHAMT CLI and analyze the new project:
 
-`mvn clean && \
-/rhamt/bin/rhamt-cli \
-  --sourceMode \
-  --input /projects/modernize-apps/monolith \
-  --output /projects/rhamt-reports/monolith \
-  --overwrite \
-  --source weblogic \
-  --target eap:7 \
+`mvn clean && 
+/rhamt/bin/rhamt-cli 
+  --sourceMode 
+  --input /projects/modernize-apps/monolith 
+  --output /projects/rhamt-reports/monolith 
+  --overwrite 
+  --source weblogic 
+  --target eap:7 
   --packages com.redhat weblogic
 `
 

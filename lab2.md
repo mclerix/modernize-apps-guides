@@ -54,7 +54,7 @@ the [RHAMT documentation](https://access.redhat.com/documentation/en/red-hat-app
 Run the following commands to set up your environment for this scenario and start in the right directory:
 
 
-`export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));') \
+`export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));') ;
 cd /projects/modernize-apps/monolith`
 
 ## Analyzing a Java EE app using Red Hat Application Migration Toolkit

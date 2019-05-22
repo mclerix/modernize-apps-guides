@@ -586,7 +586,7 @@ We are now ready to build and test the project
 
 Our application is at this stage pretty standards based, but it needs two things. One is the need to add the JMS Topic since our application depends on it. 
 
-`cd /projects/modernize-apps/monolith \
+`cd /projects/modernize-apps/monolith &&
 mvn wildfly:start wildfly:add-resource wildfly:shutdown
 `
 

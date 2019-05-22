@@ -892,10 +892,10 @@ Our production catalog microservice will use an external database (PostgreSQL) t
 First, deploy a new instance of PostgreSQL by executing:
 
 ~~~sh
-oc new-app -e POSTGRESQL_USER=catalog \
-             -e POSTGRESQL_PASSWORD=mysecretpassword \
-             -e POSTGRESQL_DATABASE=catalog \
-             openshift/postgresql:latest \
+oc new-app -e POSTGRESQL_USER=catalog &&
+             -e POSTGRESQL_PASSWORD=mysecretpassword &&
+             -e POSTGRESQL_DATABASE=catalog &&
+             openshift/postgresql:latest &&
              --name=catalog-database
 ~~~
 

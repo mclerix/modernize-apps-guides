@@ -402,10 +402,10 @@ Our production inventory microservice will use an external database (PostgreSQL)
 First, deploy a new instance of PostgreSQL by executing:
 
 
-`oc new-app -e POSTGRESQL_USER=inventory \
-           -e POSTGRESQL_PASSWORD=mysecretpassword \
-           -e POSTGRESQL_DATABASE=inventory \
-           openshift/postgresql:latest \
+`oc new-app -e POSTGRESQL_USER=inventory &&
+           -e POSTGRESQL_PASSWORD=mysecretpassword &&
+           -e POSTGRESQL_DATABASE=inventory &&
+           openshift/postgresql:latest &&
            --name=inventory-database`
 
 > **NOTE:** If you change the username and password you also need to update `src/main/fabric8/credential-secret.yml` which contains the credentials used when deploying to OpenShift.
@@ -421,7 +421,7 @@ Red Hat OpenShift Application Runtimes includes a powerful maven plugin that can
 
 Build and deploy the project using the following command, which will use the maven plugin to deploy:
 
-`cd /projects/modernize-apps/inventory \
+`cd /projects/modernize-apps/inventory &&
 mvn clean fabric8:deploy -Popenshift`
 
 The build and deploy may take a minute or two. Wait for it to complete. You should see a **BUILD SUCCESS** at the end of the build output.

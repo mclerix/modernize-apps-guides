@@ -84,12 +84,24 @@ a command in a terminal, you can use the Codeready Workspaces **Terminal** windo
 In order to login, we will use the `oc` command and then specify the server that we
 want to authenticate to.
 
-Issue the following command in Codeready Workspaces terminal and replace `{{OPENSHIFT_CONSOLE_URL}}` 
-with your OpenShift Web Console url. 
+Let's add your username as an environment variable for the next lab. This will help you to replace some labs instructions with your username without editing command.
+
+`echo "export OCP_USER=\"userXX\"" >> ~/.bash_profile; source ~/.bash_profile`
+
+Enter the following command to ensure OCP_USER is properly set :
+
+`echo $OCP_USER`
+
+You should expect :
 
 ~~~shell
-$ oc login {{OPENSHIFT_CONSOLE_URL}}
-~~~
+yourusername
+~~~~
+
+Issue the following command in Codeready Workspaces terminal with your OpenShift Web Console url. 
+
+`oc login {{OPENSHIFT_CONSOLE_URL}}`
+
 
 You may see the following output:
 

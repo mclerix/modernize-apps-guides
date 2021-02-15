@@ -491,9 +491,7 @@ The Spring MVC Framework default uses Jackson to serialize or map Java objects t
 
 Now you can run the `CatalogEndpointTest` and verify that it works.
 
-~~~sh
-mvn verify -Dtest=CatalogEndpointTest
-~~~ 
+`mvn verify -Dtest=CatalogEndpointTest` 
 
 or use ``test-spring-boot`` command in the command palette.
 
@@ -501,9 +499,8 @@ Since we now have endpoints that returns the catalog we can also start the servi
 
 Start the application by running the following command:
 
-~~~sh
-mvn spring-boot:run
-~~~~
+
+`mvn spring-boot:run`
 
 or use ``run-spring-boot`` command in the command palette.
 
@@ -688,9 +685,7 @@ productList.parallelStream()
 
 We are now ready to test the service
 
-~~~sh
-mvn verify
-~~~ 
+`mvn verify` 
 
 or use ``test-spring-boot`` command in the command palette.
 
@@ -884,7 +879,7 @@ We have already deployed our coolstore monolith and inventory to OpenShift. In t
 Make sure that you are on the right project
 
 ~~~sh
-oc project userXX-modern-coolstore
+oc project $OCP_USER-modern-coolstore
 ~~~
 
 Next, we'll deploy your new microservice to OpenShift.
@@ -897,10 +892,10 @@ Our production catalog microservice will use an external database (PostgreSQL) t
 First, deploy a new instance of PostgreSQL by executing:
 
 ~~~sh
-oc new-app -e POSTGRESQL_USER=catalog \
-             -e POSTGRESQL_PASSWORD=mysecretpassword \
-             -e POSTGRESQL_DATABASE=catalog \
-             openshift/postgresql:latest \
+oc new-app -e POSTGRESQL_USER=catalog 
+             -e POSTGRESQL_PASSWORD=mysecretpassword 
+             -e POSTGRESQL_DATABASE=catalog 
+             openshift/postgresql:latest 
              --name=catalog-database
 ~~~
 
@@ -979,7 +974,7 @@ Flow the steps below to create a path based route.
 
 **1. Obtain hostname of monolith UI from our Dev environment**
 
-`oc get route/www -n userXX-coolstore-dev`
+`oc get route/www -n $OCP_USER-coolstore-dev`
 
 > /!\ Change the project name according to your user number
 

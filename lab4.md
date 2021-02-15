@@ -45,9 +45,8 @@ Run the Maven build to make sure the skeleton project builds successfully. You s
 
 > Make sure to run the **package** Maven goal and not **install**. The latter would download a lot more dependencies and do things you don't need yet!
 
-~~~sh
-mvn clean package
-~~~~
+`mvn clean package`
+
 
 or use the command `build` in the command palette. 
 
@@ -163,9 +162,9 @@ Examine `src/main/resources/project-stages.yml` to see the database connection d
 
 Build and package the Inventory service using Maven to make sure you code compiles:
 
-~~~sh
-mvn clean package
-~~~~
+
+`mvn clean package`
+
 
 or use the command `build` in the command palette. 
 
@@ -231,9 +230,8 @@ This service class exposes a few APIs that we'll use later:
 
 Re-Build and package the Inventory service using Maven to make sure your code compiles:
 
-~~~sh
-mvn clean package
-~~~~
+`mvn clean package`
+
 
 or use the command `build` in the command palette. 
 
@@ -310,9 +308,8 @@ You should see a **BUILD SUCCESS** in the build logs.
 
 Using the Thorntail maven plugin (predefined in `pom.xml`), you can conveniently run the application locally and test the endpoint.
 
-~~~sh
-mvn wildfly-swarm:run
-~~~
+`mvn wildfly-swarm:run`
+
 
 or use the command `run-thorntail` in the command palette. 
 
@@ -384,9 +381,8 @@ In this step we will deploy our new Inventory microservice for our CoolStore app
 
 Create a new project for the modernized services:
 
-~~~sh
-oc new-project userXX-modern-coolstore --display-name="CoolStore Microservice Application"
-~~~
+`oc new-project $OCP_USER-modern-coolstore --display-name="CoolStore Microservice Application"`
+
 
 **3. Open the OpenShift Web Console**
 
@@ -405,21 +401,19 @@ Let's deploy our new inventory microservice to OpenShift!
 Our production inventory microservice will use an external database (PostgreSQL) to house inventory data.
 First, deploy a new instance of PostgreSQL by executing:
 
-~~~sh
-oc new-app -e POSTGRESQL_USER=inventory \
-           -e POSTGRESQL_PASSWORD=mysecretpassword \
-           -e POSTGRESQL_DATABASE=inventory \
-           openshift/postgresql:latest \
-           --name=inventory-database
-~~~
+
+`oc new-app -e POSTGRESQL_USER=inventory 
+           -e POSTGRESQL_PASSWORD=mysecretpassword 
+           -e POSTGRESQL_DATABASE=inventory 
+           openshift/postgresql:latest
+           --name=inventory-database`
 
 > **NOTE:** If you change the username and password you also need to update `src/main/fabric8/credential-secret.yml` which contains the credentials used when deploying to OpenShift.
 
 This will deploy the database to our new project. Wait for it to complete:
 
-~~~sh
-oc rollout status -w dc/inventory-database
-~~~
+
+`oc rollout status -w dc/inventory-database`
 
 **2. Build and Deploy**
 
@@ -427,10 +421,8 @@ Red Hat OpenShift Application Runtimes includes a powerful maven plugin that can
 
 Build and deploy the project using the following command, which will use the maven plugin to deploy:
 
-~~~sh
-cd /projects/modernize-apps/inventory
-mvn clean fabric8:deploy -Popenshift
-~~~
+`cd /projects/modernize-apps/inventory &&
+mvn clean fabric8:deploy -Popenshift`
 
 The build and deploy may take a minute or two. Wait for it to complete. You should see a **BUILD SUCCESS** at the end of the build output.
 
@@ -438,9 +430,7 @@ The build and deploy may take a minute or two. Wait for it to complete. You shou
 
 After the maven build finishes it will take less than a minute for the application to become available. To verify that everything is started, run the following command and wait for it complete successfully:
 
-~~~sh
-oc rollout status -w dc/inventory
-~~~
+`oc rollout status -w dc/inventory`
 
 >**NOTE:** Even if the rollout command reports success the application may not be ready yet and the reason for that is that we currently don't have any liveness check configured, but we will add that in the next steps.
 
@@ -561,9 +551,8 @@ With our new health check in place, we'll need to build and deploy the updated a
 
 With our health check in place, lets rebuild and redeploy using the same command as before:
 
-~~~sh
-mvn fabric8:undeploy clean fabric8:deploy -Popenshift
-~~~~
+`mvn fabric8:undeploy clean fabric8:deploy -Popenshift`
+
 
 or use the command `deploy-openshift` in the command palette.
 
@@ -580,9 +569,7 @@ During build and deploy, you\'ll notice Thorntail adding in health checks for yo
 
 To verify that everything is started, run the following command and wait for it report `replication controller "inventory-xxxx" successfully rolled out`
 
-~~~sh
-oc rollout status -w dc/inventory
-~~~
+`oc rollout status -w dc/inventory`
 
 Once the project is deployed, you should be able to access the health check logic at the `/health` endpoint using a simple _curl_ command. This is the same API that OpenShift will repeatedly poll to determine application health. Replace {{INVENTORY_ROUTE_HOST}} with the inventory route host.
 

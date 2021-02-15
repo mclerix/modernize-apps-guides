@@ -53,10 +53,9 @@ the [RHAMT documentation](https://access.redhat.com/documentation/en/red-hat-app
 
 Run the following commands to set up your environment for this scenario and start in the right directory:
 
-~~~shell
-export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')
-cd /projects/modernize-apps/monolith
-~~~
+
+`export JAVA_HOME=$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));') ;
+cd /projects/modernize-apps/monolith`
 
 ## Analyzing a Java EE app using Red Hat Application Migration Toolkit
 
@@ -123,16 +122,14 @@ When you later deploy the application, it will look like:
 The RHAMT CLI has a number of options to control how it runs. Click on the below command
 to execute the RHAMT CLI and analyze the existing project:
 
-~~~shell
-/rhamt/bin/rhamt-cli \
-  --sourceMode \
-  --input /projects/modernize-apps/monolith \
-  --output /projects/rhamt-reports/monolith \
-  --overwrite \
-  --source weblogic \
-  --target eap:7 \
-  --packages com.redhat weblogic
-~~~
+`/rhamt/bin/rhamt-cli 
+  --sourceMode 
+  --input /projects/modernize-apps/monolith 
+  --output /projects/rhamt-reports/monolith 
+  --overwrite 
+  --source weblogic 
+  --target eap:7 
+  --packages com.redhat weblogic`
 
 > Note the use of the ``--source`` and ``--target`` options. This allows you to target specific migration paths supported by RHMAT. Other
 migration paths include **IBM® WebSphere® Application Server** and **JBoss EAP** 5/6/7.
@@ -250,10 +247,8 @@ public class StartupListener {
 
 Build and package the app using Maven to make sure the changed code still compiles:
 
-~~~shell
-cd /projects/modernize-apps/monolith
-mvn clean package
-~~~
+`cd /projects/modernize-apps/monolith ; mvn clean package`
+
 
 or use the command palette to build your apps
 
@@ -491,17 +486,16 @@ In this step we will re-run the RHAMT report to verify our migration was success
 
 Click on the below command to clean the old build artifacts and re-execute the RHAMT CLI and analyze the new project:
 
-~~~shell
-mvn clean && \
-/rhamt/bin/rhamt-cli \
-  --sourceMode \
-  --input /projects/modernize-apps/monolith \
-  --output /projects/rhamt-reports/monolith \
-  --overwrite \
-  --source weblogic \
-  --target eap:7 \
+`mvn clean && 
+/rhamt/bin/rhamt-cli 
+  --sourceMode 
+  --input /projects/modernize-apps/monolith 
+  --output /projects/rhamt-reports/monolith 
+  --overwrite 
+  --source weblogic 
+  --target eap:7 
   --packages com.redhat weblogic
-~~~
+`
 
 **Wait for it to complete before continuing!**. You should see `Report created: /projects/rhamt-reports/monolith/index.html`.
 
@@ -592,10 +586,9 @@ We are now ready to build and test the project
 
 Our application is at this stage pretty standards based, but it needs two things. One is the need to add the JMS Topic since our application depends on it. 
 
-~~~shell
-cd /projects/modernize-apps/monolith
+`cd /projects/modernize-apps/monolith &&
 mvn wildfly:start wildfly:add-resource wildfly:shutdown
-~~~
+`
 
 or use the command palette `<shift>+F10` and then select `add-jms-resource`
 
@@ -607,9 +600,7 @@ Wait for a `BUILD SUCCESS` message. If it fails, check that you made all the cor
 
 We are now ready to deploy the application
 
-~~~shell
-mvn wildfly:run
-~~~
+`mvn wildfly:run`
 
 or use the command palette `<shift>+F10` and then select `run-eap`
 
@@ -700,17 +691,17 @@ We'll use the CLI to deploy the components for our monolith. To deploy the monol
 
 Switch to the dev project you created earlier:
 
-`oc project userXX-coolstore-dev`
+`oc project $OCP_USER-coolstore-dev`
 
 And finally deploy template:
 
-`oc new-app coolstore-monolith-binary-build`
+`oc new-app coolstore-monolith-binary-build -n $OCP_USER-coolstore-dev`
 
 This will deploy both a PostgreSQL database and JBoss EAP, but it will not start a build for our application.
 
 Then open up the Monolith Overview page at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-dev/`
+`https://{{OPENSHIFT_MASTER}}/console/project/$OCP_USER-coolstore-dev/`
 and verify the monolith template items are created:
 
 ![OpenShift Console]({% image_path moving-existing-apps/no-deployments.png %}){:width="60%"}
@@ -725,9 +716,8 @@ First, build the project once more using the `openshift` Maven profile, which wi
 
 Build the project:
 
-~~~shell
-mvn clean package -Popenshift
-~~~
+
+`mvn clean package -Popenshift`
 
 or use the command called `build-eap-openshift` in the command palette
 
@@ -735,9 +725,9 @@ Wait for the build to finish and the `BUILD SUCCESS` message!
 
 And finally, start the build process that will take the `.war` file and combine it with JBoss EAP and produce a Linux container image which will be automatically deployed into the project, thanks to the *DeploymentConfig* object created from the template:
 
-~~~shell
-oc start-build coolstore --from-file=deployments/ROOT.war
-~~~
+
+`oc start-build coolstore --from-file=deployments/ROOT.war`
+
 
 or use the command called `deploy-eap-openshift` in the command palette
 

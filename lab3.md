@@ -59,17 +59,16 @@ You can review the above resources in the OpenShift Web Console or using the `oc
 
 Run these commands to inspect the elements:
 
-~~~sh
-oc get bc coolstore
+`oc get bc coolstore`
 
-oc get is coolstore
+`oc get is coolstore`
 
-oc get dc coolstore
+`oc get dc coolstore`
 
-oc get svc coolstore
+`oc get svc coolstore`
 
-oc describe route www
-~~~
+`oc describe route www`
+
 
 Verify that you can access the monolith by clicking on the exposed OpenShift route at  `http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}}` to open up the sample application in a separate browser tab.
 
@@ -209,9 +208,9 @@ background: blue
 
 Again, re-build the app:
 
-~~~sh
-mvn package -Popenshift
-~~~
+
+`mvn package -Popenshift`
+
 
 or use the command `build-eap-openshift` in the command palette.
 
@@ -219,7 +218,7 @@ This will update the ROOT.war file again and cause the application to change.
 
 Re-visit the app by reloading the Coolstore webpage (or clicking again on the Coolstore application link at 
 
-`http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}})`.
+`http://www-userXX-coolstore-dev.{{ROUTE_SUFFIX}}`.
 
 ![Blue]({% image_path developer-intro/nav-blue.png %}){:width="80%"}
 
@@ -250,7 +249,7 @@ In this step we are now going to setup a separate production environment and exp
 
 ## Prod vs. Dev
 
-The existing `userXX-coolstore-dev` project is used as a developer environment for building new versions of the app after code changes and deploying them to the development environment.
+The existing `$OCP_USER-coolstore-dev` project is used as a developer environment for building new versions of the app after code changes and deploying them to the development environment.
 
 In a real project on OpenShift, _dev_, _test_ and _production_ environments would typically use different OpenShift projects and perhaps even different OpenShift clusters.
 
@@ -264,9 +263,9 @@ We will create and initialize the new production environment using another templ
 
 Execute the following `oc` command to create a new project:
 
-`oc new-project userXX-coolstore-prod --display-name='Coolstore Monolith - Production'`
+`oc new-project $OCP_USER-coolstore-prod --display-name='Coolstore Monolith - Production'`
 
-This will create a new OpenShift project called `userXX-coolstore-prod` from which our production application will run.
+This will create a new OpenShift project called `$OCP_USER-coolstore-prod` from which our production application will run.
 
 **2. Add the production elements**
 
@@ -341,7 +340,7 @@ To simplify the pipeline in this workshop, we simulate the build and tests and s
 Jenkins should have the authorization to tag the image available in the DEV environment. Enter the following command:
 
 ~~~sh
-oc policy add-role-to-user edit system:serviceaccount:userXX-coolstore-prod:jenkins -n userXX-coolstore-dev
+oc policy add-role-to-user edit system:serviceaccount:$OCP_USER-coolstore-prod:jenkins -n $OCP_USER-coolstore-dev
 ~~~
 
 **2. Promote the dev image to production using the pipeline**
@@ -363,14 +362,14 @@ take as much time as the Jenkins infrastructure will already be warmed up). You 
 
 Once the pipeline completes, return to the Prod Project Overview at 
 
-`https://{{OPENSHIFT_MASTER}}/console/project/userXX-coolstore-prod`
+`https://{{OPENSHIFT_MASTER}}/console/project/$USER_OCP-coolstore-prod`
 and notice that the application is now deployed and running!
 
 ![Prod]({% image_path developer-intro/pipe-done.png %}){:width="80%"}
 
 View the production app **with the blue header from before** is running by clicking: CoolStore Production App at 
 
-`http://www-userXX-coolstore-prod.{{ROUTE_SUFFIX}}` (it may take
+`http://www-$USER_OCP-coolstore-prod.{{ROUTE_SUFFIX}}` (it may take
 a few moments for the container to deploy fully.)
 
 ## Congratulations!
@@ -433,17 +432,16 @@ With the approval step in place, let's simulate a new change from a developer wh
 
 Next, re-build the app once more:
 
-~~~sh
-mvn clean package -Popenshift
-~~~~
+
+`mvn clean package -Popenshift`
+
 
 or use the command `build-eap-openshift` in the command palette.
 
 And re-deploy it to the dev environment using a binary build just as we did before:
 
-~~~sh
-oc start-build -n coolstore-dev coolstore --from-file=deployments/ROOT.war
-~~~~
+`oc start-build -n coolstore-dev coolstore --from-file=deployments/ROOT.war`
+
 
 or use the command `deploy-eap-openshift` in the command palette.
 
@@ -494,7 +492,7 @@ Once you click **Proceed**, you will see the log file from Jenkins showing the f
 
 Wait for the production deployment to complete:
 
-`oc rollout -n userXX-coolstore-prod status dc/coolstore-prod`
+`oc rollout -n $OCP_USER-coolstore-prod status dc/coolstore-prod`
 
 Once it completes, verify that the production application has the new change (original black header):
 
